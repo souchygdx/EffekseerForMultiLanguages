@@ -15,6 +15,7 @@
 %include various.i
 %apply char *BYTE { char* data };
 
+%include "arrays_java.i"
 #endif
 
 #if SWIGCSHARP

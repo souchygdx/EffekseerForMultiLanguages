@@ -4,6 +4,17 @@
 #include <EffekseerRendererGL.h>
 #include "EffekseerRenderer/GraphicsDevice.h"
 
+inline void copyMatrixTo(float m1[][4], float m2[]){
+	int width = 4;
+	int height = 4; // m1[0].length;
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j < width; j++) {
+			m1[i][j] = m2[i * 4 + j];
+		}
+	}
+}
+
+
 inline void matrixFromValues(::Effekseer::Matrix44& matrix, 
 	float matrixArray0,
 	float matrixArray1,
@@ -338,11 +349,21 @@ void EffekseerManagerCore::SetViewProjectionMatrixWithSimpleWindow(int32_t windo
 																::Effekseer::Vector3D(0.0f, 1.0f, 0.0f)));
 }
 
-	void EffekseerManagerCore::SetDynamicInput(int handle,int32_t index,float value){
-		manager_->SetDynamicInput(handle,index,value);
-	}
 
-	float EffekseerManagerCore::GetDynamicInput(int handle,int32_t index){
-		return manager_->GetDynamicInput(handle,index);
-	}
+void EffekseerManagerCore::setViewProjectionMatrix(float proj[], float view[]) { //, int windowWidth, int windowHeight) {
+	::Effekseer::Matrix44 m1=::Effekseer::Matrix44();
+	copyMatrixTo(m1.Values, proj);
+	renderer_->SetProjectionMatrix(m1);
+	
+	::Effekseer::Matrix44 m2 = ::Effekseer::Matrix44();
+	copyMatrixTo(m2.Values, view);
+	renderer_->SetCameraMatrix(m2);
+}
 
+void EffekseerManagerCore::SetDynamicInput(int handle,int32_t index,float value){
+	manager_->SetDynamicInput(handle,index,value);
+}
+
+float EffekseerManagerCore::GetDynamicInput(int handle,int32_t index){
+	return manager_->GetDynamicInput(handle,index);
+}

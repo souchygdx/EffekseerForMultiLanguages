@@ -121,7 +121,6 @@ public:
 
 	void LaunchWorkerThreads(int32_t n);
 
-
 	void SetBackground(uint32_t glid,bool hasMipmap);
 
 	void UnsetBackground();
@@ -129,4 +128,6 @@ public:
 	void SetDepth(uint32_t glid, bool hasMipmap);
 
 	void UnsetDepth();
+
+	void setViewProjectionMatrix(float proj[], float view[]); //, int windowWidth, int windowHeight);
 };

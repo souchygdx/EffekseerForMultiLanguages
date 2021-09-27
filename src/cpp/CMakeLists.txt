@@ -29,7 +29,26 @@ if(${JNI_FOUND})
   )
 endif()
 
+#[[ 
 
+add_library(EffekseerNativeForCSharp
+  SHARED
+  csharp/dll.cpp
+)
+
+target_link_libraries(EffekseerNativeForCSharp
+  PRIVATE
+  Effekseer
+  EffekseerRendererGL
+  EffekseerCore
+)
+
+target_include_directories(
+  EffekseerNativeForCSharp
+  PRIVATE
+  Effekseer/Dev/Cpp/Effekseer/
+  Effekseer/Dev/Cpp/EffekseerRendererGL/
+)
 
 
 find_package(PythonLibs)
@@ -55,22 +74,4 @@ find_package(PythonLibs)
     ${PYTHON_LIBRARIES}
   )
 
-add_library(EffekseerNativeForCSharp
-  SHARED
-  csharp/dll.cpp
-)
-
-target_link_libraries(EffekseerNativeForCSharp
-  PRIVATE
-  Effekseer
-  EffekseerRendererGL
-  EffekseerCore
-)
-
-target_include_directories(
-  EffekseerNativeForCSharp
-  PRIVATE
-  Effekseer/Dev/Cpp/Effekseer/
-  Effekseer/Dev/Cpp/EffekseerRendererGL/
-)
-
+]]

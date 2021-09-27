@@ -1,5 +1,6 @@
 #include "EffekseerEffectCore.h"
 #include <assert.h>
+#include <Effekseer.h>
 
 EffekseerEffectCore::EffekseerEffectCore() {}
 
@@ -188,4 +189,8 @@ int32_t EffekseerEffectCore::GetTermMin()
 {
 	Effekseer::EffectTerm t = effect_->CalculateTerm();
 	return t.TermMin;
+}
+
+EffekseerNodeCore* EffekseerEffectCore::GetRoot() { 
+	return new EffekseerNodeCore(effect_->GetRoot());
 }

@@ -1,6 +1,9 @@
 #pragma once
 
+#include <Effekseer.h>
 #include "EffekseerBackendCore.h"
+#include "EffekseerNodeCore.h"
+
 
 enum class EffekseerTextureType
 {
@@ -95,4 +98,8 @@ public:
 
 	int32_t GetTermMax();
 	int32_t GetTermMin();
+
+
+	EffekseerNodeCore* GetRoot();
+
 };

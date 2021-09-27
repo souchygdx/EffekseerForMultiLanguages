@@ -4,7 +4,9 @@
 <target name="build">
     <mkdir dir="./../build_java/java"/>
     <javac srcdir=".;" destdir="./../build_java/java" encoding="UTF-8" />
-    <jar jarfile="Effekseer.jar" basedir="./../build_java/java" destfile="./../build_java/Effekseer.jar" />
+    <jar jarfile="Effekseer.jar" basedir="./../build_java/java" destfile="./../build_java/Effekseer.jar">
+		<fileset dir="."/>
+	</jar>
 </target>
 
 
