@@ -210,15 +210,14 @@ void EffekseerManagerCore::Update(float deltaFrames)
 		return;
 	}
 
-
 	deltaFrames += restDeltaTime_;
 	restDeltaTime_ = deltaFrames - int(deltaFrames);
-	/*for (int loop = 0; loop < int(deltaFrames); loop++)
+	for (int loop = 0; loop < int(deltaFrames); loop++)
 	{
 		manager_->Update(1);
-	}*/
+	}
 	
-	manager_->Update(int(deltaFrames));
+	//manager_->Update(int(deltaFrames));
 }
 
 int EffekseerManagerCore::Play(EffekseerEffectCore* effect)
