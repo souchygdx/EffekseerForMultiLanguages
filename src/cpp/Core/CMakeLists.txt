@@ -8,6 +8,8 @@ FIND_PACKAGE(Threads REQUIRED)
 add_library(
   EffekseerCore
   STATIC
+  data/enums.h
+  data/data.h
   EffekseerBackendCore.h
   EffekseerBackendCore.cpp
   EffekseerEffectCore.h

@@ -8,47 +8,45 @@
 
 package effekseer.swig;
 
-public final class EffekseerCoreDeviceType {
-  public final static EffekseerCoreDeviceType Unknown = new EffekseerCoreDeviceType("Unknown");
-  public final static EffekseerCoreDeviceType OpenGL = new EffekseerCoreDeviceType("OpenGL");
+public enum EffekseerCoreDeviceType {
+  Unknown,
+  OpenGL;
 
   public final int swigValue() {
     return swigValue;
   }
 
-  public String toString() {
-    return swigName;
-  }
-
   public static EffekseerCoreDeviceType swigToEnum(int swigValue) {
+    EffekseerCoreDeviceType[] swigValues = EffekseerCoreDeviceType.class.getEnumConstants();
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+    for (EffekseerCoreDeviceType swigEnum : swigValues)
+      if (swigEnum.swigValue == swigValue)
+        return swigEnum;
     throw new IllegalArgumentException("No enum " + EffekseerCoreDeviceType.class + " with value " + swigValue);
   }
 
-  private EffekseerCoreDeviceType(String swigName) {
-    this.swigName = swigName;
-    this.swigValue = swigNext++;
+  @SuppressWarnings("unused")
+  private EffekseerCoreDeviceType() {
+    this.swigValue = SwigNext.next++;
   }
 
-  private EffekseerCoreDeviceType(String swigName, int swigValue) {
-    this.swigName = swigName;
+  @SuppressWarnings("unused")
+  private EffekseerCoreDeviceType(int swigValue) {
     this.swigValue = swigValue;
-    swigNext = swigValue+1;
+    SwigNext.next = swigValue+1;
   }
 
-  private EffekseerCoreDeviceType(String swigName, EffekseerCoreDeviceType swigEnum) {
-    this.swigName = swigName;
+  @SuppressWarnings("unused")
+  private EffekseerCoreDeviceType(EffekseerCoreDeviceType swigEnum) {
     this.swigValue = swigEnum.swigValue;
-    swigNext = this.swigValue+1;
+    SwigNext.next = this.swigValue+1;
   }
 
-  private static EffekseerCoreDeviceType[] swigValues = { Unknown, OpenGL };
-  private static int swigNext = 0;
   private final int swigValue;
-  private final String swigName;
+
+  private static class SwigNext {
+    private static int next = 0;
+  }
 }
 

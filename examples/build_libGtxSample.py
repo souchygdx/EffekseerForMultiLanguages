@@ -17,23 +17,26 @@ def call( cmd , env=None):
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-# build cpp dll
+# 
 os.chdir('../')
 os.makedirs('build/', exist_ok=True)
+
+# build cpp EffekseerCore
 os.chdir('build')
 call('cmake -A x64 -D BUILD_DX12=OFF -D BUILD_EXAMPLES=OFF ..')
+
+# generate dll.cpp and java source files with swig
+os.chdir('../src/')
+call('generate_swig_wrapper.bat')
+
+#build NativeJava.dll from dll.cpp from swig
+os.chdir('../build/')
 call('cmake --build . --config Release')
 shutil.copy('src/cpp/Release/EffekseerNativeForJava.dll',
             '../examples/libGdxSample/core/assets/EffekseerNativeForJava.dll')
 
-#os.chdir(os.path.dirname(os.path.abspath(__file__)))
-
-# generate java source files from swig from cpp
-os.chdir('../src/')
-call('generate_swig_wrapper.bat')
-
 # build java classes and jar
-os.chdir('java/')
+os.chdir('../src/java/')
 call('ant build')
 
 shutil.copy('../build_java/Effekseer.jar',

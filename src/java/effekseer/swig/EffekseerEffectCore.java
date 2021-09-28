@@ -116,9 +116,9 @@ public class EffekseerEffectCore {
     return EffekseerCoreJNI.EffekseerEffectCore_GetTermMin(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_EffekseerNodeCore GetRoot() {
+  public EffekseerNodeCore GetRoot() {
     long cPtr = EffekseerCoreJNI.EffekseerEffectCore_GetRoot(swigCPtr, this);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_EffekseerNodeCore(cPtr, false);
+    return (cPtr == 0) ? null : new EffekseerNodeCore(cPtr, false);
   }
 
 }

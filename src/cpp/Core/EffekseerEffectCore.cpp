@@ -193,4 +193,6 @@ int32_t EffekseerEffectCore::GetTermMin()
 
 EffekseerNodeCore* EffekseerEffectCore::GetRoot() { 
 	return new EffekseerNodeCore(effect_->GetRoot());
+	//auto n = new EffekseerNodeCore();
+	//return n->load(effect_->GetRoot());
 }

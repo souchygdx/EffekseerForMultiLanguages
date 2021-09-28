@@ -69,4 +69,18 @@ public class EffekseerCoreJNI {
   public final static native void EffekseerManagerCore_SetDepth(long jarg1, EffekseerManagerCore jarg1_, long jarg2, boolean jarg3);
   public final static native void EffekseerManagerCore_UnsetDepth(long jarg1, EffekseerManagerCore jarg1_);
   public final static native void EffekseerManagerCore_setViewProjectionMatrix(long jarg1, EffekseerManagerCore jarg1_, float[] jarg2, float[] jarg3);
+  public final static native void FloatArray_values_set(long jarg1, FloatArray jarg1_, float[] jarg2);
+  public final static native float[] FloatArray_values_get(long jarg1, FloatArray jarg1_);
+  public final static native long new_FloatArray();
+  public final static native void delete_FloatArray(long jarg1);
+  public final static native long EffekseerNodeCore_getChild(long jarg1, EffekseerNodeCore jarg1_, int jarg2);
+  public final static native int EffekseerNodeCore_getChildCount(long jarg1, EffekseerNodeCore jarg1_);
+  public final static native int EffekseerNodeCore_getTranslationType(long jarg1, EffekseerNodeCore jarg1_);
+  public final static native void EffekseerNodeCore_setTranslationType(long jarg1, EffekseerNodeCore jarg1_, int jarg2);
+  public final static native long EffekseerNodeCore_getTranslationFixed(long jarg1, EffekseerNodeCore jarg1_);
+  public final static native void EffekseerNodeCore_setTranslationFixed(long jarg1, EffekseerNodeCore jarg1_, float[] jarg2);
+  public final static native long EffekseerNodeCore_getTranslationPVA(long jarg1, EffekseerNodeCore jarg1_);
+  public final static native void EffekseerNodeCore_setTranslationPVA(long jarg1, EffekseerNodeCore jarg1_, float[] jarg2);
+  public final static native long EffekseerNodeCore_getTranslationEasing(long jarg1, EffekseerNodeCore jarg1_);
+  public final static native void EffekseerNodeCore_setTranslationEasing(long jarg1, EffekseerNodeCore jarg1_, float[] jarg2);
 }

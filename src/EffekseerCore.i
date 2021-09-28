@@ -5,6 +5,7 @@
 #include "../Core/EffekseerBackendCore.h"
 #include "../Core/EffekseerEffectCore.h"
 #include "../Core/EffekseerManagerCore.h"
+#include "../Core/EffekseerNodeCore.h"
 
 %}
 
@@ -16,6 +17,18 @@
 %apply char *BYTE { char* data };
 
 %include "arrays_java.i"
+
+%include "std_array.i"
+%include "std_vector.i"
+%include "std_auto_ptr.i"
+%include "std_common.i"
+%include "carrays.i"
+%include "typemaps.i"
+%include "stl.i"
+
+%include "java.swg"
+%include "enums.swg"
+
 #endif
 
 #if SWIGCSHARP
@@ -38,3 +51,4 @@
 %include "cpp/Core/EffekseerBackendCore.h"
 %include "cpp/Core/EffekseerEffectCore.h"
 %include "cpp/Core/EffekseerManagerCore.h"
+%include "cpp/Core/EffekseerNodeCore.h"

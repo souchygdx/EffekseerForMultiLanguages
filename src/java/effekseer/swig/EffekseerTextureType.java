@@ -8,48 +8,46 @@
 
 package effekseer.swig;
 
-public final class EffekseerTextureType {
-  public final static EffekseerTextureType Color = new EffekseerTextureType("Color");
-  public final static EffekseerTextureType Normal = new EffekseerTextureType("Normal");
-  public final static EffekseerTextureType Distortion = new EffekseerTextureType("Distortion");
+public enum EffekseerTextureType {
+  Color,
+  Normal,
+  Distortion;
 
   public final int swigValue() {
     return swigValue;
   }
 
-  public String toString() {
-    return swigName;
-  }
-
   public static EffekseerTextureType swigToEnum(int swigValue) {
+    EffekseerTextureType[] swigValues = EffekseerTextureType.class.getEnumConstants();
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+    for (EffekseerTextureType swigEnum : swigValues)
+      if (swigEnum.swigValue == swigValue)
+        return swigEnum;
     throw new IllegalArgumentException("No enum " + EffekseerTextureType.class + " with value " + swigValue);
   }
 
-  private EffekseerTextureType(String swigName) {
-    this.swigName = swigName;
-    this.swigValue = swigNext++;
+  @SuppressWarnings("unused")
+  private EffekseerTextureType() {
+    this.swigValue = SwigNext.next++;
   }
 
-  private EffekseerTextureType(String swigName, int swigValue) {
-    this.swigName = swigName;
+  @SuppressWarnings("unused")
+  private EffekseerTextureType(int swigValue) {
     this.swigValue = swigValue;
-    swigNext = swigValue+1;
+    SwigNext.next = swigValue+1;
   }
 
-  private EffekseerTextureType(String swigName, EffekseerTextureType swigEnum) {
-    this.swigName = swigName;
+  @SuppressWarnings("unused")
+  private EffekseerTextureType(EffekseerTextureType swigEnum) {
     this.swigValue = swigEnum.swigValue;
-    swigNext = this.swigValue+1;
+    SwigNext.next = this.swigValue+1;
   }
 
-  private static EffekseerTextureType[] swigValues = { Color, Normal, Distortion };
-  private static int swigNext = 0;
   private final int swigValue;
-  private final String swigName;
+
+  private static class SwigNext {
+    private static int next = 0;
+  }
 }
 
