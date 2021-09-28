@@ -30,9 +30,9 @@ void EffekseerNodeCore::setParameterCommonValues(float t[])
 {
 	int i = 0;
 	node_->CommonValues.MaxGeneration = t[i++];
-	node_->CommonValues.TranslationBindType = (Effekseer::TranslationParentBindType)t[i++];
-	node_->CommonValues.RotationBindType = (Effekseer::BindType)t[i++];
-	node_->CommonValues.ScalingBindType = (Effekseer::BindType)t[i++];
+	node_->CommonValues.TranslationBindType = (Effekseer::TranslationParentBindType) (int) t[i++];
+	node_->CommonValues.RotationBindType = (Effekseer::BindType) (int) t[i++];
+	node_->CommonValues.ScalingBindType = (Effekseer::BindType) (int) t[i++];
 	node_->CommonValues.RemoveWhenLifeIsExtinct = t[i++];
 	node_->CommonValues.RemoveWhenParentIsRemoved = t[i++];
 	node_->CommonValues.RemoveWhenChildrenIsExtinct = t[i++];
@@ -88,7 +88,7 @@ void EffekseerNodeCore::setGenerationLine(float t[])
 	node_->GenerationLocation.type = Effekseer::ParameterGenerationLocation::TYPE_LINE;
 
 	node_->GenerationLocation.line.division = t[i++];
-	node_->GenerationLocation.line.type = (Effekseer::ParameterGenerationLocation::LineType)t[i++];
+	node_->GenerationLocation.line.type = (Effekseer::ParameterGenerationLocation::LineType) (int) t[i++];
 
 	node_->GenerationLocation.line.position_start.min.x = t[i++];
 	node_->GenerationLocation.line.position_start.min.y = t[i++];
