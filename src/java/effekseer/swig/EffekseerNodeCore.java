@@ -40,6 +40,38 @@ public class EffekseerNodeCore {
     return EffekseerCoreJNI.EffekseerNodeCore_getChildCount(swigCPtr, this);
   }
 
+  public void setVisibility(boolean visible) {
+    EffekseerCoreJNI.EffekseerNodeCore_setVisibility(swigCPtr, this, visible);
+  }
+
+  public void setParameterCommonValues(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setParameterCommonValues(swigCPtr, this, t);
+  }
+
+  public void setGeneration(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setGeneration(swigCPtr, this, t);
+  }
+
+  public void setGenerationPoint(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setGenerationPoint(swigCPtr, this, t);
+  }
+
+  public void setGenerationLine(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setGenerationLine(swigCPtr, this, t);
+  }
+
+  public void setGenerationCircle(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setGenerationCircle(swigCPtr, this, t);
+  }
+
+  public void setGenerationSphere(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setGenerationSphere(swigCPtr, this, t);
+  }
+
+  public void setGenerationModel(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setGenerationModel(swigCPtr, this, t);
+  }
+
   public int getTranslationType() {
     return EffekseerCoreJNI.EffekseerNodeCore_getTranslationType(swigCPtr, this);
   }
@@ -70,6 +102,98 @@ public class EffekseerNodeCore {
 
   public void setTranslationEasing(float[] values) {
     EffekseerCoreJNI.EffekseerNodeCore_setTranslationEasing(swigCPtr, this, values);
+  }
+
+  public int getRotationType() {
+    return EffekseerCoreJNI.EffekseerNodeCore_getRotationType(swigCPtr, this);
+  }
+
+  public void setRotationType(int type) {
+    EffekseerCoreJNI.EffekseerNodeCore_setRotationType(swigCPtr, this, type);
+  }
+
+  public void setRotationFixed(float[] values) {
+    EffekseerCoreJNI.EffekseerNodeCore_setRotationFixed(swigCPtr, this, values);
+  }
+
+  public void setRotationPVA(float[] values) {
+    EffekseerCoreJNI.EffekseerNodeCore_setRotationPVA(swigCPtr, this, values);
+  }
+
+  public void setRotationEasing(float[] values) {
+    EffekseerCoreJNI.EffekseerNodeCore_setRotationEasing(swigCPtr, this, values);
+  }
+
+  public int getScalingType() {
+    return EffekseerCoreJNI.EffekseerNodeCore_getScalingType(swigCPtr, this);
+  }
+
+  public void setScalingType(int type) {
+    EffekseerCoreJNI.EffekseerNodeCore_setScalingType(swigCPtr, this, type);
+  }
+
+  public void setScalingFixed(float[] values) {
+    EffekseerCoreJNI.EffekseerNodeCore_setScalingFixed(swigCPtr, this, values);
+  }
+
+  public void setScalingPVA(float[] values) {
+    EffekseerCoreJNI.EffekseerNodeCore_setScalingPVA(swigCPtr, this, values);
+  }
+
+  public void setScalingEasing(float[] values) {
+    EffekseerCoreJNI.EffekseerNodeCore_setScalingEasing(swigCPtr, this, values);
+  }
+
+  public void setBasicRenderSettings(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setBasicRenderSettings(swigCPtr, this, t);
+  }
+
+  public void setBasicRenderSettingsMaterialDefault(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setBasicRenderSettingsMaterialDefault(swigCPtr, this, t);
+  }
+
+  public void setBasicRenderSettingsMaterialDistortion(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setBasicRenderSettingsMaterialDistortion(swigCPtr, this, t);
+  }
+
+  public void setBasicRenderSettingsMaterialLighting(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setBasicRenderSettingsMaterialLighting(swigCPtr, this, t);
+  }
+
+  public void setBasicRenderSettingsMaterialFile(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setBasicRenderSettingsMaterialFile(swigCPtr, this, t);
+  }
+
+  public void setRenderSettings(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setRenderSettings(swigCPtr, this, t);
+  }
+
+  public void setRenderSettingsNone(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setRenderSettingsNone(swigCPtr, this, t);
+  }
+
+  public void setRenderSettingsSprite(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setRenderSettingsSprite(swigCPtr, this, t);
+  }
+
+  public void setRenderSettingsTrack(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setRenderSettingsTrack(swigCPtr, this, t);
+  }
+
+  public void setRenderSettingsRibbon(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setRenderSettingsRibbon(swigCPtr, this, t);
+  }
+
+  public void setRenderSettingsRing(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setRenderSettingsRing(swigCPtr, this, t);
+  }
+
+  public void setRenderSettingsModel(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setRenderSettingsModel(swigCPtr, this, t);
+  }
+
+  public void setRenderSettings_ColorAll(float[] t) {
+    EffekseerCoreJNI.EffekseerNodeCore_setRenderSettings_ColorAll(swigCPtr, this, t);
   }
 
 }
