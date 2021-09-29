@@ -506,21 +506,111 @@ void EffekseerNodeCore::setScalingEasing(float values[])
 
 void EffekseerNodeCore::setBasicRenderSettings(float t[]) {
 	int i = 0;
-	node_->RendererCommon;
+	// material
+	auto matType = (Effekseer::RendererMaterialType) (int) t[i++];
+	node_->RendererCommon.MaterialType = matType;
+	switch (matType)
+	{
+		case Effekseer::RendererMaterialType::Default: 
+			setBasicRenderSettingsMaterialDefault(t);
+			i += 3;
+			break;
+		case Effekseer::RendererMaterialType::BackDistortion: 
+			setBasicRenderSettingsMaterialDistortion(t);
+			i += 3;
+			break;
+		case Effekseer::RendererMaterialType::Lighting: 
+			setBasicRenderSettingsMaterialLighting(t);
+			i += 5;
+			break;
+		case Effekseer::RendererMaterialType::File: 
+			setBasicRenderSettingsMaterialFile(t);
+			i += 0;
+			break;
+	}
+	// 
+	node_->RendererCommon.AlphaBlend = (Effekseer::AlphaBlendType) (int) t[i++];
+	node_->RendererCommon.ZWrite = t[i++] == 1;
+	node_->RendererCommon.ZTest = t[i++] == 1;
+	// fade in
+	switch ((int)t[i++])
+	{
+	case 0:
+		node_->RendererCommon.FadeInType = node_->RendererCommon.FADEIN_OFF;
+		break;
+	case 1:
+		node_->RendererCommon.FadeInType = node_->RendererCommon.FADEIN_ON;
+		break;
+	}
+	node_->RendererCommon.FadeIn.Frame = t[i++];
+	node_->RendererCommon.FadeIn.Value.easingA = t[i++];
+	node_->RendererCommon.FadeIn.Value.easingB = t[i++];
+	node_->RendererCommon.FadeIn.Value.easingC = t[i++];
+	// fade out
+	switch ((int)t[i++])
+	{
+	case 0:
+		node_->RendererCommon.FadeOutType = node_->RendererCommon.FADEOUT_OFF;
+		break;
+	case 1:
+		node_->RendererCommon.FadeOutType = node_->RendererCommon.FADEOUT_ON;
+		break;
+	} 
+	node_->RendererCommon.FadeOut.Frame = t[i++];
+	node_->RendererCommon.FadeOut.Value.easingA = t[i++];
+	node_->RendererCommon.FadeOut.Value.easingB = t[i++];
+	node_->RendererCommon.FadeOut.Value.easingC = t[i++];
+	// uv
+	switch ((int) t[i++])
+	{
+	case 0:
+		node_->RendererCommon.UVTypes[0] = node_->RendererCommon.UV_DEFAULT;
+		break;
+	case 1:
+		node_->RendererCommon.UVTypes[0] = node_->RendererCommon.UV_FIXED;
+		break;
+	case 2:
+		node_->RendererCommon.UVTypes[0] = node_->RendererCommon.UV_ANIMATION;
+		break;
+	case 3:
+		node_->RendererCommon.UVTypes[0] = node_->RendererCommon.UV_SCROLL;
+		break;
+	case 4:
+		node_->RendererCommon.UVTypes[0] = node_->RendererCommon.UV_FCURVE;
+		break;
+	}
+	// color
+	node_->RendererCommon.ColorBindType = (Effekseer::BindType) (int) t[i++];
 }
 
 void EffekseerNodeCore::setBasicRenderSettingsMaterialDefault(float t[]) { 
 	int i = 0;
+	int matType = t[i++];
+	node_->RendererCommon.EmissiveScaling = t[i++];
+	node_->RendererCommon.FilterTypes[0] = (Effekseer::TextureFilterType) (int) t[i++];
+	node_->RendererCommon.WrapTypes[0] = (Effekseer::TextureWrapType) (int) t[i++];
 }
 void EffekseerNodeCore::setBasicRenderSettingsMaterialDistortion(float t[]) { 
 	int i = 0; 
+	int matType = t[i++];
+	node_->RendererCommon.FilterTypes[0] = (Effekseer::TextureFilterType) (int) t[i++];
+	node_->RendererCommon.WrapTypes[0] = (Effekseer::TextureWrapType) (int) t[i++];
+	node_->RendererCommon.DistortionIntensity = t[i++];
 }
 
 void EffekseerNodeCore::setBasicRenderSettingsMaterialLighting(float t[]) {
 	int i = 0;
+	int matType = t[i++];
+	node_->RendererCommon.EmissiveScaling = t[i++];
+	node_->RendererCommon.FilterTypes[0] = (Effekseer::TextureFilterType) (int) t[i++];
+	node_->RendererCommon.WrapTypes[0] = (Effekseer::TextureWrapType) (int) t[i++];
+	node_->RendererCommon.FilterTypes[1] = (Effekseer::TextureFilterType) (int) t[i++];
+	node_->RendererCommon.WrapTypes[1] = (Effekseer::TextureWrapType) (int) t[i++];
 }
 void EffekseerNodeCore::setBasicRenderSettingsMaterialFile(float t[]) {
 	int i = 0;
+	int matType = t[i++];
+	// ???
 }
 
 #pragma endregion
@@ -599,12 +689,14 @@ void EffekseerNodeCore::setRenderSettings_ColorAll(float t[]) {
 	int type = t[i++];
 	switch (type) {
 		case 0:
+			model->AllColor.type = model->AllColor.Fixed;
 			model->AllColor.fixed.all.R = t[i++];
 			model->AllColor.fixed.all.G = t[i++];
 			model->AllColor.fixed.all.B = t[i++];
 			model->AllColor.fixed.all.A = t[i++];
 			break;// Fixed = 0,
 		case 1:
+			model->AllColor.type = model->AllColor.Random;
 			model->AllColor.random.all.mode = (Effekseer::ColorMode) (int) t[i++];
 			model->AllColor.random.all.min.R = t[i++];
 			model->AllColor.random.all.min.G = t[i++];
@@ -616,6 +708,7 @@ void EffekseerNodeCore::setRenderSettings_ColorAll(float t[]) {
 			model->AllColor.random.all.max.A = t[i++];
 			break; //Random = 1,
 		case 2: 
+			model->AllColor.type = model->AllColor.Easing;
 			model->AllColor.easing.all.start.mode = (Effekseer::ColorMode) (int) t[i++];
 			model->AllColor.easing.all.start.min.R = t[i++];
 			model->AllColor.easing.all.start.min.G = t[i++];
@@ -637,11 +730,23 @@ void EffekseerNodeCore::setRenderSettings_ColorAll(float t[]) {
 			model->AllColor.easing.all.end.max.A = t[i++];
 			break; //Easing = 2,
 		case 3:
+			model->AllColor.type = model->AllColor.FCurve_RGBA;
 			//model->AllColor.fcurve_rgba.FCurve->R;
 			break; //FCurve_RGBA = 3,
 	}
-	; // color : [fixed {v4}, random { v4 min, v4 max }, easing { v4 startMin, v4 startMax, v4 endMin, v4 endMax }, fcurve {}]
+	// color : [fixed {v4}, random { v4 min, v4 max }, easing { v4 startMin, v4 startMax, v4 endMin, v4 endMax }, fcurve {}]
 }
+
+//void EffekseerNodeCore::setRenderSettings_ColorAllFixedTest()
+//{
+//	auto model = (Effekseer::EffectNodeModel*) node_;
+//	model->AllColor.type = model->AllColor.Fixed;
+//	model->AllColor.fixed.all.R = 255;
+//	model->AllColor.fixed.all.G = 255;
+//	model->AllColor.fixed.all.B = 255;
+//	model->AllColor.fixed.all.A = 255;
+//}
+
 
 #pragma endregion
 
