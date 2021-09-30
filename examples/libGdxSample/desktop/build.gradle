@@ -1,6 +1,6 @@
 apply plugin: "java"
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.8
 sourceSets.main.java.srcDirs = [ "src/" ]
 sourceSets.main.resources.srcDirs = ["../core/assets"]
 
@@ -39,3 +39,15 @@ task dist(type: Jar) {
 dist.dependsOn classes
 
 eclipse.project.name = appName + "-desktop"
+
+
+
+eclipse.classpath { containers "org.eclipse.buildship.core.gradleclasspathcontainer" }
+eclipse.classpath.file.whenMerged { classpath ->
+	classpath.entries.findAll { it.kind == 'con' && it.path == 'org.eclipse.buildship.core.gradleclasspathcontainer' }
+	.each {
+		it.entryAttributes['org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY'] = 'libGdxSample-core/assets'
+	}
+}
+
+                    

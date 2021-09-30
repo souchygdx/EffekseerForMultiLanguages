@@ -49,7 +49,7 @@ public class Main extends ApplicationAdapter {
 	 */
 	public void runEffect(boolean mods) {
 		String effectPath = "bin/main/Laser03.efkefc";
-		var effect = manager.loadEffect(effectPath, 1);
+		Effect effect = manager.loadEffect(effectPath, 1);
 		if (effect == null) {
 			System.out.print("Failed to load.");
 			return;
@@ -82,8 +82,8 @@ public class Main extends ApplicationAdapter {
 		setup.camera.update();
 		setup.controller.update();
 		// apply camera projection to effekseer (only needed if the camera moved)
-		var p = setup.camera.projection.val;
-		var v = setup.camera.view.val; 
+		float[] p = setup.camera.projection.val;
+		float[] v = setup.camera.view.val; 
 		if(Jeffekseer.yUp) v = setup.camera.view.rotate(Vector3.X, 90).val;
 		manager.setViewProjectionMatrix(p, v);
 		

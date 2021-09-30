@@ -42,7 +42,7 @@ public class Basic3dSetup {
 		
 		// load cube model
 		String path = "cube.g3dj";
-		var assets = new AssetManager();
+		AssetManager assets = new AssetManager();
 		assets.load(path, Model.class);
 		assets.finishLoading();
 		Model cubeModel = assets.get(path); 
@@ -54,7 +54,7 @@ public class Basic3dSetup {
 		cache.begin();
 		for(int i = 0; i < size; i++) {
 			for(int j = 0; j < size; j++) {
-				var inst = new ModelInstance(cubeModel);
+				ModelInstance inst = new ModelInstance(cubeModel);
 				inst.transform.translate(i, j, 0).scale(scl, scl, scl);
 				if((i + j) % 2 == 0)
 					inst.materials.get(0).set(ColorAttribute.createDiffuse(Color.DARK_GRAY));
@@ -71,8 +71,8 @@ public class Basic3dSetup {
 	}
 
 	private Environment createEnvironment() {
-		var env = new Environment();
-		var ambiant = 0.8f;
+		Environment env = new Environment();
+		float ambiant = 0.8f;
 		env.set(new ColorAttribute(ColorAttribute.AmbientLight, ambiant, ambiant, ambiant, 1f));
 		return env;
 	}
@@ -86,7 +86,7 @@ public class Basic3dSetup {
 	}
 	
 	public void topView() {
-		var center = new Vector3(7.5f, 7.5f, 0f);
+		Vector3 center = new Vector3(7.5f, 7.5f, 0f);
 		camera.direction.set(0, 0, -1f);
 		camera.up.set(1, 1, -1f);
 		camera.position.set(center.x, center.y, center.z); 

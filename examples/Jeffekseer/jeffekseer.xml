@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project default="build" name="Jeffekseer">
+
+	<target name="build">
+	    <jar jarfile="jeffekseer.jar" basedir="bin/" destfile="jeffekseer.jar">
+			<fileset dir="src/"/>
+			<fileset dir="../../src/java/">
+				<exclude name="*.xml"/>
+			</fileset>
+		</jar>
+		
+
+		<copy file="jeffekseer.jar" todir="../libGdxSample/core/libs" />
+	</target>
+
+
+</project>
