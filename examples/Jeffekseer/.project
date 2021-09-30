@@ -18,7 +18,13 @@
 		<link>
 			<name>Effekseer</name>
 			<type>2</type>
-			<location>C:/Robyn/Git/libgdx/EffekseerForMultiLanguages/src/java</location>
+			<locationURI>swigjava</locationURI>
 		</link>
 	</linkedResources>
+	<variableList>
+		<variable>
+			<name>swigjava</name>
+			<value>$%7BPARENT-2-PROJECT_LOC%7D/src/java</value>
+		</variable>
+	</variableList>
 </projectDescription>
