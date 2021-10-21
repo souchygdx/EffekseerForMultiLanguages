@@ -34,6 +34,8 @@ os.chdir('../build/')
 call('cmake --build . --config Release')
 shutil.copy('src/cpp/Release/EffekseerNativeForJava.dll',
             '../examples/libGdxSample/core/assets/EffekseerNativeForJava.dll')
+shutil.copy('src/cpp/Release/EffekseerNativeForJava.dll',
+            '../examples/Jeffekseer/EffekseerNativeForJava.dll')
 
 # build java classes and jar
 os.chdir('../src/java/')

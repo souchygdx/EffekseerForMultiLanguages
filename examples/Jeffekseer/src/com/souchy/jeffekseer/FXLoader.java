@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.function.Function;
 
 import effekseer.swig.EffekseerEffectCore;
 import effekseer.swig.EffekseerManagerCore;
@@ -12,9 +13,7 @@ import effekseer.swig.EffekseerTextureType;
 
 public class FXLoader {
 	
-	public static EffekseerManagerCore manager;
-	
-	private static byte[] read(String path) {
+	public static Function<String, byte[]> read = (String path) -> {
     	try {
     		Path p = Paths.get(path);
 //    		System.out.println("Jeffekseer FXLoader path [" + path + "] " + new File(".").getAbsolutePath());
@@ -23,19 +22,16 @@ public class FXLoader {
 			e.printStackTrace();
 			return new byte[0];
 		}
-	}
+	};
 	
-	private static byte[] read(File handle) {
-		return read(handle.getPath());
-	}
 	
     public static EffekseerEffectCore loadEffect(EffekseerEffectCore effectCore, String effectPath, float magnification) {
 //      com.badlogic.gdx.files.FileHandle handle = Gdx.files.internal(effectPath);
-    	File handle = new File(effectPath);
-
+    	//File handle = new File(effectPath);
+    	
         // load an effect
         {
-            byte[] bytes = read(handle); // handle.readBytes();
+            byte[] bytes = read.apply(effectPath); // handle.readBytes();
             if (!effectCore.Load(bytes, bytes.length, magnification)) {
                 System.out.print("Failed to load.");
                 return null;
@@ -54,7 +50,7 @@ public class FXLoader {
 			for (int i = 0; i < effectCore.GetTextureCount(textureTypes[t]); i++) {
 				String path = new File(effectPath).getParent();
 				path = fixPath(path, effectCore.GetTexturePath(i, textureTypes[t]));
-				byte[] bytes = read(path);
+				byte[] bytes = read.apply(path);
 				effectCore.LoadTexture(bytes, bytes.length, i, textureTypes[t]);
 			}
 		}
@@ -62,21 +58,21 @@ public class FXLoader {
 		for (int i = 0; i < effectCore.GetModelCount(); i++) {
 			String path = new File(effectPath).getParent();
 			path = fixPath(path, effectCore.GetModelPath(i));
-			byte[] bytes = read(path);
+			byte[] bytes = read.apply(path);
 			effectCore.LoadModel(bytes, bytes.length, i);
 		}
 		// materials
 		for (int i = 0; i < effectCore.GetMaterialCount(); i++) {
 			String path = new File(effectPath).getParent();
 			path = fixPath(path, effectCore.GetMaterialPath(i));
-            byte[] bytes = read(path);
+            byte[] bytes = read.apply(path);
 			effectCore.LoadMaterial(bytes, bytes.length, i);
 		}
 		// curves
 		for (int i = 0; i < effectCore.GetCurveCount(); i++) {
 			String path = new File(effectPath).getParent();
 			path = fixPath(path, effectCore.GetCurvePath(i));
-            byte[] bytes = read(path);
+            byte[] bytes = read.apply(path);
 			effectCore.LoadCurve(bytes, bytes.length, i);
 		}
 

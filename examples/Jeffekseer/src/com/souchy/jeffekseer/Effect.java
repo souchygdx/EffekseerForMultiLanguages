@@ -39,7 +39,11 @@ public class Effect extends EffekseerEffectCore {
 	 */
 	public OnCompletionLambda onComplete = () -> stop();
 	
-	private float duration;
+	/** 
+	 * Just a default duration of 100 frames to make sure effects play and complete. 
+	 * You should set a real duration yourself.
+	 */
+	private float duration = 100f / 60f;
 	
 	public Effect(EffectManager manager) {
 		this.manager = manager;
@@ -65,7 +69,9 @@ public class Effect extends EffekseerEffectCore {
 		}
 	}
 	public void pause(boolean pause) {
-		manager.SetPaused(getRef(), pause);
+		if(getRef() != noref) {
+			manager.SetPaused(getRef(), pause);
+		}
 	}
 	
 	public void stop() {
@@ -101,20 +107,26 @@ public class Effect extends EffekseerEffectCore {
 	 * Sets the position of the whole effect.
 	 */
 	public void setPosition(float x, float y, float z) {
-		if(Jeffekseer.yUp) { 
-			// if y up, swap the z and y then flip the y to combine with the 90° X rotation and bring back everything to normal
-	        manager.SetEffectPosition(getRef(),
-	                x * Jeffekseer.worldScaleX + Jeffekseer.worldOffsetX,
-	                z * Jeffekseer.worldScaleZ + Jeffekseer.worldOffsetZ,
-	                -y * Jeffekseer.worldScaleY - Jeffekseer.worldOffsetY
-	        );
-		} else {
-	        manager.SetEffectPosition(getRef(),
-	                x * Jeffekseer.worldScaleX + Jeffekseer.worldOffsetX,
-	                y * Jeffekseer.worldScaleY + Jeffekseer.worldOffsetY,
-	                z * Jeffekseer.worldScaleZ + Jeffekseer.worldOffsetZ
-	        );
+		if(getRef() != noref) {
+			if(Jeffekseer.yUp) { 
+				// if y up, swap the z and y then flip the y to combine with the 90° X rotation and bring back everything to normal
+		        manager.SetEffectPosition(getRef(),
+		                x * Jeffekseer.worldScaleX + Jeffekseer.worldOffsetX,
+		                z * Jeffekseer.worldScaleZ + Jeffekseer.worldOffsetZ,
+		                -y * Jeffekseer.worldScaleY - Jeffekseer.worldOffsetY
+		        );
+			} else {
+		        manager.SetEffectPosition(getRef(),
+		                x * Jeffekseer.worldScaleX + Jeffekseer.worldOffsetX,
+		                y * Jeffekseer.worldScaleY + Jeffekseer.worldOffsetY,
+		                z * Jeffekseer.worldScaleZ + Jeffekseer.worldOffsetZ
+		        );
+			}
 		}
+	}
+	
+	public void setPosition(double x, double y, double z) {
+		setPosition((float) x, (float) y, (float) z);
 	}
 	
 	/*
